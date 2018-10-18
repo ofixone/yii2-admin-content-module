@@ -1,0 +1,22 @@
+{
+    "name": "ofixone/yii2-improved-content",
+    "description": "Yii2 Improved Content Module",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","content"],
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Vladimir Galtsev",
+            "email": "ofixmail@yandex.ru"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "~2.0.0",
+        "ofixone/yii2-improved-admin": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "ofixone\\content\\": "src"
+        }
+    }
+}
