@@ -3,6 +3,7 @@
 namespace ofixone\content;
 
 use ofixone\admin\interfaces\ModuleInterface;
+use ofixone\content\assets\ModuleAsset;
 use ofixone\content\models\FilterModel;
 use yii\base\InvalidConfigException;
 use yii\db\ActiveRecord;
@@ -40,6 +41,7 @@ class Module extends \yii\base\Module implements ModuleInterface
     public function init()
     {
         parent::init();
+        ModuleAsset::register(\Yii::$app->view);
         $this->checkModels();
     }
 

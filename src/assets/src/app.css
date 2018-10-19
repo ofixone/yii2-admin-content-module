@@ -1,0 +1,7 @@
+.kv-panel-pager {
+    min-height: auto !important;
+}
+
+textarea {
+    resize: vertical;
+}

@@ -13,7 +13,8 @@
     "require": {
         "yiisoft/yii2": "~2.0.0",
         "ofixone/yii2-improved-admin": "dev-master",
-        "microinginer/yii2-dropdown-action-column": "^1.0"
+        "microinginer/yii2-dropdown-action-column": "^1.0",
+        "uran1980/yii2-textarea-autosize": "dev-master"
     },
     "autoload": {
         "psr-4": {
