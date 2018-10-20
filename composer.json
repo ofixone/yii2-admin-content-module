@@ -19,7 +19,8 @@
         "kartik-v/yii2-grid": "^3.1",
         "kartik-v/yii2-widget-activeform": "^1.5",
         "kartik-v/yii2-widgets": "^3.4",
-        "kartik-v/yii2-checkbox-x": "^1.0"
+        "kartik-v/yii2-checkbox-x": "^1.0",
+        "kartik-v/yii2-editable": "^1.7"
     },
     "autoload": {
         "psr-4": {

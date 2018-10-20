@@ -2,6 +2,7 @@
 
 namespace ofixone\content\controllers;
 
+use kartik\grid\EditableColumnAction;
 use ofixone\filekit\CropAction;
 use ofixone\filekit\UploadAction;
 use trntv\filekit\actions\DeleteAction;
@@ -45,6 +46,10 @@ class ModuleController extends Controller
             ],
             'crop' => [
                 'class' => CropAction::class
+            ],
+            'editable' => [
+                'class' => EditableColumnAction::class,
+                'modelClass' => $this->module->model
             ]
         ];
     }
