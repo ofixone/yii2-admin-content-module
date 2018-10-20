@@ -187,6 +187,19 @@ abstract class FilterModel extends Model
                         $config
                     ));
                     break;
+                case 'images':
+                    return $form->field($model, $attribute)->widget(Upload::class, ArrayHelper::merge(
+                        [
+                            'multiple' => true,
+                            'sortable' => true,
+                            'maxNumberOfFiles' => ArrayHelper::remove($config, 'max', 10),
+                            'url' => ['upload'],
+                            'cropUrl' => ['crop'],
+                            'acceptFileTypes' => new \yii\web\JsExpression('/(\.|\/)(gif|jpe?g|png|svg)$/i'),
+                        ],
+                        $config
+                    ));
+                    break;
                 case 'file':
                     return $form->field($model, $attribute)->widget(Upload::class, ArrayHelper::merge(
                         [
