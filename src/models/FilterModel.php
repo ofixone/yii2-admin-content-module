@@ -188,7 +188,19 @@ abstract class FilterModel extends Model
                     ));
                     break;
                 case 'redactor':
-                    return $form->field($model, $attribute)->widget(Redactor::class);
+                    return $form->field($model, $attribute)->widget(Redactor::class, !empty($config) ? $config : []);
+                    break;
+                case 'inputRedactor':
+                    return $form->field($model, $attribute)->widget(Redactor::class, ArrayHelper::merge(
+                        [
+                            'clientOptions' => [
+                                'uploadImage' => false,
+                                'uploadFile' => false,
+                                'buttons' => ['html', 'bold', 'italic', 'deleted', 'link']
+                            ]
+                        ],
+                        $config
+                    ));
                     break;
                 case 'checkbox':
                     return $form->field($model, $attribute)->widget(CheckboxX::class, [

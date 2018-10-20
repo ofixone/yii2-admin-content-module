@@ -94,16 +94,17 @@ class Module extends \yii\base\Module implements ModuleInterface
 
     public function addMenuItem(): array
     {
-        return [
-            ArrayHelper::merge([
+        return ArrayHelper::merge([
+            'group' => 'Контент',
+            'item' => [
                 'label' => $this->type == self::TYPE_MULTIPLE ? $this->names[self::NAME_COUPLE] : $this->names[self::NAME_ONE],
                 'icon' => !empty($this->menuItem['icon']) ? $this->menuItem['icon'] : 'folder',
                 'url' => [
                     "/" . $this->getUniqueId() . "/" . $this->defaultRoute
                 ],
                 'active' => \Yii::$app->controller->module->id == $this->id
-            ], $this->menuItem)
-        ];
+            ]
+        ], $this->menuItem);
     }
 
     public function getIsMultipleType()
