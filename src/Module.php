@@ -25,6 +25,7 @@ class Module extends \yii\base\Module implements ModuleInterface
     public $type = self::TYPE_MULTIPLE;
     public $names = [
         self::NAME_ONE => 'Контент',
+        self::NAME_MULTIPLE => 'Элементы контента',
         self::NAME_COUPLE => 'Элемента контента',
         self::NAME_MANY => 'Элементов контета'
     ];
@@ -39,8 +40,9 @@ class Module extends \yii\base\Module implements ModuleInterface
     const TYPE_SINGLE = 'single';
     const TYPE_MULTIPLE = 'multiple';
     const NAME_ONE = 0;
-    const NAME_COUPLE = 1;
-    const NAME_MANY = 2;
+    const NAME_MULTIPLE = 1;
+    const NAME_COUPLE = 2;
+    const NAME_MANY = 3;
 
     public function init()
     {
@@ -108,7 +110,7 @@ class Module extends \yii\base\Module implements ModuleInterface
         return ArrayHelper::merge([
             'group' => 'Контент',
             'item' => [
-                'label' => $this->type == self::TYPE_MULTIPLE ? $this->names[self::NAME_COUPLE] : $this->names[self::NAME_ONE],
+                'label' => $this->type == self::TYPE_MULTIPLE ? $this->names[self::NAME_MULTIPLE] : $this->names[self::NAME_ONE],
                 'icon' => !empty($this->menuItem['icon']) ? $this->menuItem['icon'] : 'folder',
                 'url' => [
                     "/" . $this->getUniqueId() . "/" . $this->defaultRoute

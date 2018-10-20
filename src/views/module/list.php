@@ -9,7 +9,7 @@
  */
 $module = Yii::$app->controller->module;
 $this->title = \ofixone\content\helpers\StringHelper::mb_ucfirst($module->names[
-    $module::NAME_COUPLE
+    $module::NAME_MULTIPLE
 ]);
 $this->params['breadcrumbs'] = [
     [
