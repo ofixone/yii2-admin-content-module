@@ -46,6 +46,17 @@ class Module extends \yii\base\Module implements ModuleInterface
     {
         parent::init();
         ModuleAsset::register(\Yii::$app->view);
+        switch ($this->type) {
+            case self::TYPE_SINGLE:
+                $this->defaultRoute = 'module/update';
+                break;
+            case self::TYPE_MULTIPLE:
+                $this->defaultRoute = 'module/list';
+                break;
+            default:
+                throw new InvalidConfigException('Неправильный тип контент-модуля');
+                break;
+        }
         if(empty(Yii::$app->getModule('redactor', false))) {
             Yii::$app->setModule('redactor', [
                 'class' => RedactorModule::class,

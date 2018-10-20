@@ -187,6 +187,15 @@ abstract class FilterModel extends Model
                         $config
                     ));
                     break;
+                case 'file':
+                    return $form->field($model, $attribute)->widget(Upload::class, ArrayHelper::merge(
+                        [
+                            'url' => ['upload'],
+                            'cropUrl' => ['crop']
+                        ],
+                        $config
+                    ));
+                    break;
                 case 'redactor':
                     return $form->field($model, $attribute)->widget(Redactor::class, !empty($config) ? $config : []);
                     break;
