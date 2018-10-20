@@ -18,7 +18,7 @@ $this->title = \ofixone\content\helpers\StringHelper::mb_ucfirst(
 $this->params['breadcrumbs'] = [
     [
         'label' => \ofixone\content\helpers\StringHelper::mb_ucfirst(
-            $module->names[$module::NAME_COUPLE]
+            $module->names[$module::NAME_MULTIPLE]
         ),
         'url' => ['list']
     ], [
