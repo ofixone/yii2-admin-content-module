@@ -2,6 +2,7 @@
 
 namespace ofixone\content\controllers;
 
+use ofixone\filekit\CropAction;
 use ofixone\filekit\UploadAction;
 use trntv\filekit\actions\DeleteAction;
 use yii\web\Controller;
@@ -42,6 +43,9 @@ class ModuleController extends Controller
             'upload-delete' => [
                 'class' => DeleteAction::class,
             ],
+            'crop' => [
+                'class' => CropAction::class
+            ]
         ];
     }
 
