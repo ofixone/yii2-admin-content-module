@@ -5,3 +5,30 @@
 textarea {
     resize: vertical;
 }
+
+.main-header {
+    z-index: 10
+}
+.main-sidebar {
+    z-index: 8;
+}
+
+.form-control {
+    height: 32px;
+}
+
+label {
+    display: inline;
+}
+
+.daterangepicker .ranges {
+    width: 100%;
+    float: none;
+}
+.daterangepicker .ranges button {
+    width: 49%;
+}
+
+.select2-container .select2-selection--single .select2-selection__rendered {
+    margin-top: 0 !important;
+}

@@ -2,6 +2,8 @@
 
 namespace ofixone\content\controllers;
 
+use ofixone\filekit\UploadAction;
+use trntv\filekit\actions\DeleteAction;
 use yii\web\Controller;
 use ofixone\content\models\FilterModel;
 use ofixone\content\Module;
@@ -29,6 +31,20 @@ class ModuleController extends Controller
         }
         return true;
     }
+
+    public function actions()
+    {
+        return [
+            'upload' => [
+                'class' => UploadAction::class,
+                'deleteRoute' => 'upload-delete',
+            ],
+            'upload-delete' => [
+                'class' => DeleteAction::class,
+            ],
+        ];
+    }
+
 
     public function actionList()
     {
@@ -64,7 +80,7 @@ class ModuleController extends Controller
                     'js' => true,
                     'icon' => 'success',
                     'heading' => 'Сохранено!',
-                    'text' => 'Новая запись успешно сохранена',
+                    'text' => 'Запись успешно обновлена',
                     'position' => 'top-right'
                 ]);
                 if ($this->module->type === Module::TYPE_MULTIPLE && Yii::$app->request->post('save-back') !== null) {
@@ -109,7 +125,7 @@ class ModuleController extends Controller
                 if (Yii::$app->request->post('save-back') !== null) {
                     return $this->redirect(Url::previous());
                 } else {
-                    return $this->redirect(['update', 'id' => $model->id]);
+                    return $this->redirect(['update', 'id' => $model->getPrimaryKey()]);
                 }
             } else {
                 Yii::$app->session->setFlash('alert', [
@@ -122,6 +138,7 @@ class ModuleController extends Controller
                 ]);
             }
         }
+        $model->loadDefaultValues();
         return $this->render('create', [
             'model' => $model,
             'filterModel' => new $this->module->filterModel
@@ -144,6 +161,7 @@ class ModuleController extends Controller
         if (empty($model)) {
             throw new NotFoundHttpException();
         } else {
+            $model->delete();
             Yii::$app->session->setFlash('alert', [
                 'js' => true,
                 'icon' => 'success',

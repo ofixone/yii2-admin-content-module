@@ -1,8 +1,8 @@
 {
-    "name": "ofixone/yii2-improved-content",
+    "name": "ofixone/yii2-imp-content",
     "description": "Yii2 Improved Content Module",
     "type": "yii2-extension",
-    "keywords": ["yii2","extension","content"],
+    "keywords": ["yii2","extension","improved","content"],
     "license": "BSD-3-Clause",
     "authors": [
         {
@@ -12,9 +12,14 @@
     ],
     "require": {
         "yiisoft/yii2": "~2.0.0",
-        "ofixone/yii2-improved-admin": "dev-master",
         "microinginer/yii2-dropdown-action-column": "^1.0",
-        "uran1980/yii2-textarea-autosize": "dev-master"
+        "uran1980/yii2-textarea-autosize": "0.0.6",
+        "yiidoc/yii2-redactor": "^2.0",
+        "kartik-v/yii2-date-range": "^1.6",
+        "kartik-v/yii2-grid": "^3.1",
+        "kartik-v/yii2-widget-activeform": "^1.5",
+        "kartik-v/yii2-widgets": "^3.4",
+        "kartik-v/yii2-checkbox-x": "^1.0"
     },
     "autoload": {
         "psr-4": {

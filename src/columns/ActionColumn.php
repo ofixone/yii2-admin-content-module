@@ -15,7 +15,8 @@ class ActionColumn extends DropDownActionColumn
             'label' => 'Удалить',
             'url' => ['delete'],
             'linkOptions' => [
-                'data-method' => 'post'
+                'data-method' => 'post',
+                'data-confirm' => 'Вы действительно хотите удалить эту запись?',
             ],
         ],
     ];

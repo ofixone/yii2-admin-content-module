@@ -8,6 +8,8 @@ use ofixone\content\models\FilterModel;
 use yii\base\InvalidConfigException;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
+use yii\redactor\RedactorModule;
+use Yii;
 
 /**
  * Class Module
@@ -26,7 +28,9 @@ class Module extends \yii\base\Module implements ModuleInterface
         self::NAME_COUPLE => 'Элемента контента',
         self::NAME_MANY => 'Элементов контета'
     ];
-    public $menuItem = [];
+    public $menuItem = [
+        'icon' => 'folder'
+    ];
     public $model;
     public $filterModel;
     public $disableCreate = false;
@@ -42,6 +46,19 @@ class Module extends \yii\base\Module implements ModuleInterface
     {
         parent::init();
         ModuleAsset::register(\Yii::$app->view);
+        if(empty(Yii::$app->getModule('redactor', false))) {
+            Yii::$app->setModule('redactor', [
+                'class' => RedactorModule::class,
+                'uploadDir' => '@webroot/uploads/redactor',
+                'uploadUrl' => '@web/uploads/redactor',
+                'imageAllowExtensions'=>['jpg','jpeg','png','gif']
+            ]);
+        }
+        if(empty(Yii::$app->getModule('gridview', false))) {
+            Yii::$app->setModule('gridview', [
+                'class' => \kartik\grid\Module::class
+            ]);
+        }
         $this->checkModels();
     }
 
@@ -80,7 +97,7 @@ class Module extends \yii\base\Module implements ModuleInterface
         return [
             ArrayHelper::merge([
                 'label' => $this->type == self::TYPE_MULTIPLE ? $this->names[self::NAME_COUPLE] : $this->names[self::NAME_ONE],
-                'icon' => 'folder',
+                'icon' => !empty($this->menuItem['icon']) ? $this->menuItem['icon'] : 'folder',
                 'url' => [
                     "/" . $this->getUniqueId() . "/" . $this->defaultRoute
                 ],

@@ -2,7 +2,11 @@
 
 namespace ofixone\content\models;
 
+use kartik\checkbox\CheckboxX;
+use kartik\date\DatePicker;
 use kartik\form\ActiveForm;
+use kartik\select2\Select2;
+use ofixone\filekit\Upload;
 use yii\base\InvalidConfigException;
 use yii\base\Model;
 use yii\bootstrap\Tabs;
@@ -11,6 +15,7 @@ use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use yii\redactor\widgets\Redactor;
 use yii\web\NotFoundHttpException;
 
 abstract class FilterModel extends Model
@@ -66,7 +71,7 @@ abstract class FilterModel extends Model
             }
         }
         return new ActiveDataProvider([
-            'query' => $query
+            'query' => $query,
         ]);
     }
 
@@ -89,15 +94,14 @@ abstract class FilterModel extends Model
         $attributeWidgets = ArrayHelper::merge([
             'fields' => [],
             'options' => [
-                'tabs' => false,
-                'handleNotInFields' => false
+                'tabs' => false
             ]
         ], $this->getAttributeWidgets()) ;
         if(!empty($attributeWidgets['fields'])) {
             foreach($attributeWidgets['fields'] as $key => $value) {
                 if($attributeWidgets['options']['tabs'] === true && is_array($value)) {
                     foreach($value as $key2 => $value2) {
-                        if(empty($tab[$key])) {
+                        if(empty($tabs[$key])) {
                             $tabs[$key] = $this->printWidget($key2, $value2, $form, $model);
                         } else {
                             $tabs[$key] .= $this->printWidget($key2, $value2, $form, $model);
@@ -146,9 +150,52 @@ abstract class FilterModel extends Model
                     );
                     break;
                 case "textarea":
-                    return $form->field($model, $attribute)->widget(
+                    return $form->field($model, $attribute)->textarea(
                         !empty($config) ? $config : []
                     );
+                    break;
+                case "select":
+                    return $form->field($model, $attribute)->widget(Select2::class, ArrayHelper::merge(
+                        [
+                            'pluginOptions' => [
+                                'allowClear' => true,
+                                'placeholder' => 'Выберите'
+                            ]
+                        ],
+                        $config
+                    ));
+                    break;
+                case 'date':
+                    return $form->field($model, $attribute)->widget(DatePicker::class, ArrayHelper::merge(
+                        [
+                            'removeButton' => false,
+                            'pluginOptions' => [
+                                'autoclose'=>true,
+                                'format' => 'yyyy-mm-dd'
+                            ]
+                        ],
+                        $config
+                    ));
+                    break;
+                case 'image':
+                    return $form->field($model, $attribute)->widget(Upload::class, ArrayHelper::merge(
+                        [
+                            'url' => ['upload'],
+                            'acceptFileTypes' => new \yii\web\JsExpression('/(\.|\/)(gif|jpe?g|png|svg)$/i'),
+                        ],
+                        $config
+                    ));
+                    break;
+                case 'redactor':
+                    return $form->field($model, $attribute)->widget(Redactor::class);
+                    break;
+                case 'checkbox':
+                    return $form->field($model, $attribute)->widget(CheckboxX::class, [
+                        'pluginOptions' => [
+                            'threeState' => false
+                        ],
+                        'autoLabel' => true
+                    ])->label(false);
                     break;
                 default:
                     return $form->field($model, $attribute)->widget(ArrayHelper::remove($config, 0), $config);
