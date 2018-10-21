@@ -233,7 +233,7 @@ abstract class FilterModel extends Model
                     ])->label(false);
                     break;
                 default:
-                    return $form->field($model, $attribute)->widget(ArrayHelper::remove($config, 0), $config);
+                    return $form->field($model, $attribute)->widget($widget, $config);
                     break;
             }
         } else if(is_bool($config) && $config === false) {
