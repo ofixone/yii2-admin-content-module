@@ -20,6 +20,8 @@ use yii\web\NotFoundHttpException;
 
 abstract class FilterModel extends Model
 {
+    public $model;
+
     abstract public function query(): ActiveQuery;
 
     public function getDefaultSearchAttributes()

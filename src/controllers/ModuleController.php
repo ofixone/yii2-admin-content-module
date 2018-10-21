@@ -108,7 +108,9 @@ class ModuleController extends Controller
         }
         return $this->render('update', [
             'model' => $model,
-            'filterModel' => new $this->module->filterModel
+            'filterModel' => new $this->module->filterModel([
+                'model' => $model
+            ])
         ]);
     }
 
@@ -150,7 +152,9 @@ class ModuleController extends Controller
         $model->loadDefaultValues();
         return $this->render('create', [
             'model' => $model,
-            'filterModel' => new $this->module->filterModel
+            'filterModel' => new $this->module->filterModel([
+                'model' => $model
+            ])
         ]);
     }
 

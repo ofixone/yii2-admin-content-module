@@ -15,13 +15,17 @@ $this->title = \ofixone\content\helpers\StringHelper::mb_ucfirst(
     $module::NAME_ONE
     ])
 );
-$this->params['breadcrumbs'] = [
+$this->params['breadcrumbs'] = !empty($module->names[$module::NAME_MULTIPLE]) ? [
     [
         'label' => \ofixone\content\helpers\StringHelper::mb_ucfirst(
             $module->names[$module::NAME_MULTIPLE]
         ),
         'url' => ['list']
     ], [
+        'label' => $this->title
+    ]
+] : [
+    [
         'label' => $this->title
     ]
 ];
