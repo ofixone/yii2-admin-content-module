@@ -13,6 +13,7 @@
     "require": {
         "yiisoft/yii2": "~2.0.0",
         "ofixone/yii2-imp-admin": "0.1.0",
+        "ofixone/yii2-imp-file-kit": "0.1.0",
         "microinginer/yii2-dropdown-action-column": "^1.0",
         "uran1980/yii2-textarea-autosize": "0.0.6",
         "yiidoc/yii2-redactor": "^2.0",
