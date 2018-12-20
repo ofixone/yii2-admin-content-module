@@ -47,32 +47,34 @@ class Module extends \yii\base\Module implements ModuleInterface
     public function init()
     {
         parent::init();
-        ModuleAsset::register(\Yii::$app->view);
-        switch ($this->type) {
-            case self::TYPE_SINGLE:
-                $this->defaultRoute = 'module/update';
-                break;
-            case self::TYPE_MULTIPLE:
-                $this->defaultRoute = 'module/list';
-                break;
-            default:
-                throw new InvalidConfigException('Неправильный тип контент-модуля');
-                break;
+        if(Yii::$app instanceof \yii\web\Application) {
+            switch ($this->type) {
+                case self::TYPE_SINGLE:
+                    $this->defaultRoute = 'module/update';
+                    break;
+                case self::TYPE_MULTIPLE:
+                    $this->defaultRoute = 'module/list';
+                    break;
+                default:
+                    throw new InvalidConfigException('Неправильный тип контент-модуля');
+                    break;
+            }
+            ModuleAsset::register(\Yii::$app->view);
+            if(empty(Yii::$app->getModule('redactor', false))) {
+                Yii::$app->setModule('redactor', [
+                    'class' => RedactorModule::class,
+                    'uploadDir' => '@webroot/uploads/redactor',
+                    'uploadUrl' => '@web/uploads/redactor',
+                    'imageAllowExtensions'=>['jpg','jpeg','png','gif']
+                ]);
+            }
+            if(empty(Yii::$app->getModule('gridview', false))) {
+                Yii::$app->setModule('gridview', [
+                    'class' => \kartik\grid\Module::class
+                ]);
+            }
+            $this->checkModels();
         }
-        if(empty(Yii::$app->getModule('redactor', false))) {
-            Yii::$app->setModule('redactor', [
-                'class' => RedactorModule::class,
-                'uploadDir' => '@webroot/uploads/redactor',
-                'uploadUrl' => '@web/uploads/redactor',
-                'imageAllowExtensions'=>['jpg','jpeg','png','gif']
-            ]);
-        }
-        if(empty(Yii::$app->getModule('gridview', false))) {
-            Yii::$app->setModule('gridview', [
-                'class' => \kartik\grid\Module::class
-            ]);
-        }
-        $this->checkModels();
     }
 
     public function checkModels()
