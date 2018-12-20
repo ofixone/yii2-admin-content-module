@@ -12,7 +12,7 @@
     ],
     "require": {
         "yiisoft/yii2": "~2.0.0",
-        "ofixone/yii2-admin": "^0.1",
+        "ofixone/yii2-admin-module": "^0.1",
         "ofixone/yii2-file-kit": "^0.1",
         "microinginer/yii2-dropdown-action-column": "^1.0",
         "uran1980/yii2-textarea-autosize": "0.0.6",
