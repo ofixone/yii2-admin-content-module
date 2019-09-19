@@ -11,9 +11,7 @@ use kartik\form\ActiveForm;
 
 $module = Yii::$app->controller->module;
 $this->title = \ofixone\content\helpers\StringHelper::mb_ucfirst(
-    'Добавить ' . mb_strtolower($module->names[
-        $module::NAME_ONE
-    ])
+    'Добавить ' . mb_strtolower($module->names[$module::NAME_ONE])
 );
 $this->params['breadcrumbs'] = [
     [
@@ -27,7 +25,11 @@ $this->params['breadcrumbs'] = [
 ];
 ?>
 <?php $form = ActiveForm::begin() ?>
-    <?= $filterModel->getForm($form, $model); ?>
+    <div class="box box-default">
+        <div class="box-body">
+            <?= $filterModel->getForm($form, $model); ?>
+        </div>
+    </div>
     <div class="box box-default">
         <div class="box-body">
             <?= \yii\helpers\Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>

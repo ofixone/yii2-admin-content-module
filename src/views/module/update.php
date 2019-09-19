@@ -11,9 +11,7 @@ use kartik\form\ActiveForm;
 
 $module = Yii::$app->controller->module;
 $this->title = \ofixone\content\helpers\StringHelper::mb_ucfirst(
-    'Обновить ' . mb_strtolower($module->names[
-    $module::NAME_ONE
-    ])
+    'Обновить ' . mb_strtolower($module->names[$module::NAME_ONE])
 );
 $this->params['breadcrumbs'] = !empty($module->names[$module::NAME_MULTIPLE]) ? [
     [
@@ -31,7 +29,11 @@ $this->params['breadcrumbs'] = !empty($module->names[$module::NAME_MULTIPLE]) ? 
 ];
 ?>
 <?php $form = ActiveForm::begin() ?>
-<?= $filterModel->getForm($form, $model); ?>
+    <div class="box box-default">
+        <div class="box-body">
+            <?= $filterModel->getForm($form, $model); ?>
+        </div>
+    </div>
     <div class="box box-default">
         <div class="box-body">
             <?= \yii\helpers\Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
@@ -41,7 +43,7 @@ $this->params['breadcrumbs'] = !empty($module->names[$module::NAME_MULTIPLE]) ? 
                     'name' => 'save-back'
                 ])
             ?>
-            <?php if($module->disableDelete === false): ?>
+            <?php if ($module->disableDelete === false): ?>
                 <?= \yii\helpers\Html::a(
                     'Удалить',
                     ['delete', 'id' => $model->getPrimaryKey()],

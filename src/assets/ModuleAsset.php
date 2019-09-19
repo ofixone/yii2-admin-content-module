@@ -8,7 +8,11 @@ use yii\web\AssetBundle;
 
 class ModuleAsset extends AssetBundle
 {
-    public $sourcePath = __DIR__ . "/src";
+    public function init()
+    {
+        parent::init();
+        $this->sourcePath = __DIR__ . "/src";
+    }
 
     public $css = [
         'app.css'
