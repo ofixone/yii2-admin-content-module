@@ -4,6 +4,7 @@ namespace ofixone\content;
 
 use ofixone\admin\interfaces\ModuleInterface;
 use ofixone\content\assets\ModuleAsset;
+use ofixone\content\models\AdminModel;
 use ofixone\content\models\FilterModel;
 use yii\base\InvalidConfigException;
 use yii\db\ActiveRecord;
@@ -29,11 +30,8 @@ class Module extends \yii\base\Module implements ModuleInterface
         self::NAME_COUPLE => 'Элемента контента',
         self::NAME_MANY => 'Элементов контета'
     ];
-    public $menuItem = [
-        'icon' => 'folder'
-    ];
     public $model;
-    public $filterModel;
+    public $adminModel;
     public $disableCreate = false;
     public $disableDelete = false;
 
@@ -84,15 +82,15 @@ class Module extends \yii\base\Module implements ModuleInterface
                 ' контент-модуля '. $this->names[self::NAME_ONE]
             );
         }
-        if(empty($this->filterModel) && $this->isMultipleType) {
-            throw new InvalidConfigException('Необходимо задать модель фильтрации '. FilterModel::class .
+        if(empty($this->adminModel) && $this->isMultipleType) {
+            throw new InvalidConfigException('Необходимо задать модель фильтрации '. AdminModel::class .
                 ' для контент-модуля '. $this->names[self::NAME_ONE]
             );
-        } else if(!empty($this->filterModel) && $this->isMultipleType) {
-            $test = new $this->filterModel;
-            if(!$test instanceof FilterModel) {
-                throw new InvalidConfigException('Модель фильтрации '. $this->filterModel . ' должна наследоваться' .
-                    ' от ' . FilterModel::class);
+        } else if(!empty($this->adminModel) && $this->isMultipleType) {
+            $test = new $this->adminModel;
+            if(!$test instanceof AdminModel) {
+                throw new InvalidConfigException('Модель фильтрации '. $this->adminModel . ' должна наследоваться' .
+                    ' от ' . AdminModel::class);
             }
         }
     }
@@ -105,21 +103,6 @@ class Module extends \yii\base\Module implements ModuleInterface
                 'route' => '<module>/' . $this->id . '/module/' . '<action>'
             ]
         ];
-    }
-
-    public function addMenuItem(): array
-    {
-        return ArrayHelper::merge([
-            'group' => 'Контент',
-            'item' => [
-                'label' => $this->type == self::TYPE_MULTIPLE ? $this->names[self::NAME_MULTIPLE] : $this->names[self::NAME_ONE],
-                'icon' => !empty($this->menuItem['icon']) ? $this->menuItem['icon'] : 'folder',
-                'url' => [
-                    "/" . $this->getUniqueId() . "/" . $this->defaultRoute
-                ],
-                'active' => \Yii::$app->controller->module->id == $this->id
-            ]
-        ], $this->menuItem);
     }
 
     public function getIsMultipleType()

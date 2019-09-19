@@ -7,7 +7,7 @@ use ofixone\filekit\CropAction;
 use ofixone\filekit\UploadAction;
 use trntv\filekit\actions\DeleteAction;
 use yii\web\Controller;
-use ofixone\content\models\FilterModel;
+use ofixone\content\models\AdminModel;
 use ofixone\content\Module;
 use Yii;
 use yii\db\ActiveRecord;
@@ -60,16 +60,16 @@ class ModuleController extends Controller
         /**
          * @var ActiveRecord $modelClass
          * @var ActiveRecord $model
-         * @var FilterModel $filterModel
+         * @var AdminModel $adminModel
          */
         $modelClass = $this->module->model;
         $model = new $modelClass;
-        $filterModel = new $this->module->filterModel;
-        $filterModel->load(Yii::$app->request->get());
-        $dataProvider = $filterModel->getDataProvider();
+        $adminModel = new $this->module->adminModel;
+        $adminModel->load(Yii::$app->request->get());
+        $dataProvider = $adminModel->getDataProvider();
         return $this->render('list', [
             'model' => $model,
-            'filterModel' => $filterModel,
+            'adminModel' => $adminModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -108,7 +108,7 @@ class ModuleController extends Controller
         }
         return $this->render('update', [
             'model' => $model,
-            'filterModel' => new $this->module->filterModel([
+            'adminModel' => new $this->module->adminModel([
                 'model' => $model
             ])
         ]);
@@ -152,7 +152,7 @@ class ModuleController extends Controller
         $model->loadDefaultValues();
         return $this->render('create', [
             'model' => $model,
-            'filterModel' => new $this->module->filterModel([
+            'adminModel' => new $this->module->adminModel([
                 'model' => $model
             ])
         ]);

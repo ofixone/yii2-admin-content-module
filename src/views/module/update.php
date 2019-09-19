@@ -2,7 +2,7 @@
 /**
  * @var yii\web\View $this
  * @var \yii\db\ActiveRecord $model
- * @var \ofixone\content\models\FilterModel $filterModel
+ * @var \ofixone\content\models\AdminModel $adminModel
  *
  * @var \ofixone\content\Module $module
  */
@@ -31,7 +31,7 @@ $this->params['breadcrumbs'] = !empty($module->names[$module::NAME_MULTIPLE]) ? 
 <?php $form = ActiveForm::begin() ?>
     <div class="box box-default">
         <div class="box-body">
-            <?= $filterModel->getForm($form, $model); ?>
+            <?= $adminModel->getForm($form, $model); ?>
         </div>
     </div>
     <div class="box box-default">

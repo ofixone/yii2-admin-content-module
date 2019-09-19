@@ -2,7 +2,7 @@
 /**
  * @var \yii\web\View $this
  * @var \yii\db\ActiveRecord $model
- * @var \ofixone\content\models\FilterModel $filterModel
+ * @var \ofixone\content\models\AdminModel $adminModel
  * @var \yii\data\ActiveDataProvider $dataProvider
  *
  * @var \ofixone\content\Module $module
@@ -26,13 +26,13 @@ $this->params['breadcrumbs'] = [
                 'style' => 'margin-bottom: 0px'
             ],
             'dataProvider' => $dataProvider,
-            'filterModel' => $filterModel,
+            'filterModel' => $adminModel,
             'resizableColumns' => true,
             'hover' => true,
             'responsive' => false,
             'persistResize' => true,
             'pager' => ['options' => ['class' => 'pagination no-margin']],
-            'columns' => $filterModel->getGridColumns(),
+            'columns' => $adminModel->getGridColumns(),
             'toolbar' => [
                 '{toggleData}'
             ],
