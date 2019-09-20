@@ -288,13 +288,13 @@ abstract class AdminModel extends Model
             $containerOptions = [];
             $labelOptions = [];
             $hintOptions = [];
-            if ($config['containerOptions']) {
+            if (isset($config['containerOptions'])) {
                 $containerOptions = ArrayHelper::remove($config, 'containerOptions');
             }
-            if ($config['labelOptions']) {
+            if (isset($config['labelOptions'])) {
                 $labelOptions = ArrayHelper::remove($config, 'labelOptions');
             }
-            if ($config['hintOptions']) {
+            if (isset($config['hintOptions'])) {
                 $hintOptions = ArrayHelper::remove($config, 'hintOptions');
             }
             $field = null;
