@@ -3,6 +3,7 @@
 namespace ofixone\content\controllers;
 
 use kartik\grid\EditableColumnAction;
+use ofixone\admin\widgets\alert\Widget;
 use ofixone\filekit\CropAction;
 use ofixone\filekit\UploadAction;
 use trntv\filekit\actions\DeleteAction;
@@ -86,8 +87,7 @@ class ModuleController extends Controller
         if (Yii::$app->request->isPost) {
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 Yii::$app->session->setFlash('alert', [
-                    'js' => true,
-                    'icon' => 'success',
+                    'type' => Widget::TYPE_SUCCESS,
                     'heading' => 'Сохранено!',
                     'text' => 'Запись успешно обновлена',
                     'position' => 'top-right'
@@ -98,7 +98,7 @@ class ModuleController extends Controller
             } else {
                 Yii::$app->session->setFlash('alert', [
                     'js' => true,
-                    'icon' => 'error',
+                    'icon' => 'success',
                     'heading' => 'Ошибка!',
                     'text' => 'При сохранении данных произошла ошибка: '
                         . implode(",", $model->getFirstErrors()),
@@ -128,7 +128,7 @@ class ModuleController extends Controller
         if (Yii::$app->request->isPost) {
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 Yii::$app->session->setFlash('alert', [
-                    'icon' => 'success',
+                    'type' => Widget::TYPE_SUCCESS,
                     'heading' => 'Сохранено!',
                     'text' => 'Новая запись успешно добавлена',
                     'position' => 'top-right'
