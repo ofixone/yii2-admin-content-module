@@ -32,8 +32,9 @@ class Module extends \yii\base\Module implements ModuleInterface
     ];
     public $model;
     public $adminModel;
-    public $disableCreate = false;
-    public $disableDelete = false;
+    public $disableCreate;
+    public $disableDelete;
+    public $disableUpdate;
 
     const TYPE_SINGLE = 'single';
     const TYPE_MULTIPLE = 'multiple';

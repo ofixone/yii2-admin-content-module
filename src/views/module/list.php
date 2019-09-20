@@ -39,7 +39,9 @@ $this->params['breadcrumbs'] = [
             'panel' => [
                 'heading' => false,
                 'type' => 'default',
-                'before' => $module->disableCreate == false ? \yii\helpers\Html::a(
+                'before' => (
+                    $module->disableCreate ? call_user_func($module->disableCreate, $module) : false
+                ) === false ? \yii\helpers\Html::a(
                     'Добавить ' . mb_strtolower($module->names[
                         $module::NAME_ONE
                     ]),

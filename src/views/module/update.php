@@ -43,7 +43,9 @@ $this->params['breadcrumbs'] = !empty($module->names[$module::NAME_MULTIPLE]) ? 
                     'name' => 'save-back'
                 ])
             ?>
-            <?php if ($module->disableDelete === false): ?>
+            <?php if ((
+                $module->disableCreate ? call_user_func($module->disableCreate, $module) : false
+            ) === false): ?>
                 <?= \yii\helpers\Html::a(
                     'Удалить',
                     ['delete', 'id' => $model->getPrimaryKey()],

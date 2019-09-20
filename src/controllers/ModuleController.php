@@ -77,6 +77,13 @@ class ModuleController extends Controller
 
     public function actionUpdate($id = 1)
     {
+        if((
+            $this->module->disableUpdate ? call_user_func($this->module->disableUpdate, $this->module) : false
+        ) === true) {
+            throw new ForbiddenHttpException('Обновление для ' .
+                $this->module->names[Module::NAME_ONE] .
+                ' запрещено');
+        }
         /**
          * @var $model ActiveRecord
          * @var $class ActiveRecord
@@ -119,7 +126,9 @@ class ModuleController extends Controller
         /**
          * @var $model ActiveRecord
          */
-        if($this->module->disableCreate == true) {
+        if((
+            $this->module->disableCreate ? call_user_func($this->module->disableCreate, $this->module) : false
+        ) === true) {
             throw new ForbiddenHttpException('Создание для ' .
                 $this->module->names[Module::NAME_ONE] .
             ' запрещено');
@@ -164,7 +173,9 @@ class ModuleController extends Controller
          * @var $model ActiveRecord
          * @var $class ActiveRecord
          */
-        if($this->module->disableDelete == true) {
+        if((
+            $this->module->disableDelete ? call_user_func($this->module->disableDelete, $this->module) : false
+        ) === true) {
             throw new ForbiddenHttpException('Удаление для ' .
                 $this->module->names[Module::NAME_ONE] .
             ' запрещено');
