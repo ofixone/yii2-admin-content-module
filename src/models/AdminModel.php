@@ -298,7 +298,7 @@ abstract class AdminModel extends Model
                 $hintOptions = ArrayHelper::remove($config, 'hintOptions');
             }
             $field = null;
-            switch ($attributeWidgetsTypes[$widget]) {
+            switch (!empty($attributeWidgetsTypes[$widget])) {
                 case true:
                     /**
                      * @var ActiveField $field
