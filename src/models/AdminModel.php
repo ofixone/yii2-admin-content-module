@@ -7,11 +7,13 @@ use kartik\date\DatePicker;
 use kartik\form\ActiveField;
 use kartik\form\ActiveForm;
 use kartik\select2\Select2;
+use ofixone\content\widgets\grid\GridView;
 use ofixone\filekit\Upload;
 use yii\base\InvalidConfigException;
 use yii\base\Model;
 use yii\bootstrap\Tabs;
 use yii\data\ActiveDataProvider;
+use yii\data\Pagination;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
@@ -226,6 +228,10 @@ abstract class AdminModel extends Model
         }
         return new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageParam' => $this->formName() . '-page',
+                'pageSizeParam' => $this->formName() . '-per-page'
+            ]
         ]);
     }
 
@@ -333,5 +339,22 @@ abstract class AdminModel extends Model
     public function getForm(ActiveForm $form, ActiveRecord $model): string
     {
         return $this->printAttributeWidgets($form, $model);
+    }
+
+    public function getGrid()
+    {
+        return GridView::widget([
+            'adminModel' => $this,
+        ]);
+    }
+
+    public function getGridExportFilename()
+    {
+        return $this->formName();
+    }
+
+    public function getGridExportColumns()
+    {
+        return $this->getGridColumns();
     }
 }
