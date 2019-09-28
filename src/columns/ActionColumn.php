@@ -20,4 +20,18 @@ class ActionColumn extends DropDownActionColumn
             ],
         ],
     ];
+    public $activeButtons = [];
+
+    public function init()
+    {
+        parent::init();
+        foreach($this->items as $key => $item) {
+            if(isset($this->activeButtons[$key]) && $this->activeButtons[$key] === false) {
+                unset($this->items[$key]);
+            }
+        }
+        if(empty($this->items)) {
+            $this->visible = false;
+        }
+    }
 }
