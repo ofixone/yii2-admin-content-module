@@ -67,7 +67,7 @@ $export = \kartik\export\ExportMenu::widget([
         'after' => !empty(Yii::$app->request->get($widget->adminModel->formName())) ?
             \yii\helpers\Html::a(
                 'Очистить фильтры',
-                ['list'],
+                \yii\helpers\ArrayHelper::merge([''], $get),
                 ['class' => 'btn btn-info']
             )
             : false
