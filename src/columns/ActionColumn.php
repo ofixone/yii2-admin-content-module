@@ -24,6 +24,7 @@ class ActionColumn extends DropDownActionColumn
         ],
     ];
     public $activeButtons = [];
+    public $defaultItems = false;
 
     /**
      * @inheritdoc
