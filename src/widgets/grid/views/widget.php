@@ -63,7 +63,7 @@ $export = \kartik\export\ExportMenu::widget([
             \yii\helpers\ArrayHelper::remove($widget->createButton, 'label'),
             \yii\helpers\ArrayHelper::remove($widget->createButton, 'url'),
             $widget->createButton
-        ) : false,
+        ) : null,
         'after' => !empty(Yii::$app->request->get($widget->adminModel->formName())) ?
             \yii\helpers\Html::a(
                 'Очистить фильтры',
