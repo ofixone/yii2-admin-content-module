@@ -91,6 +91,9 @@ class ModuleController extends Controller
         $class = $this->module->model;
         $model = $class::find()->where(['id' => $id])->limit(1)->one();
         if (empty($model)) throw new NotFoundHttpException();
+        $adminModel = new $this->module->adminModel([
+            'model' => $model
+        ]);
         if (Yii::$app->request->isPost) {
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 Yii::$app->session->setFlash('alert', [
@@ -115,9 +118,7 @@ class ModuleController extends Controller
         }
         return $this->render('update', [
             'model' => $model,
-            'adminModel' => new $this->module->adminModel([
-                'model' => $model
-            ])
+            'adminModel' => $adminModel
         ]);
     }
 
@@ -134,6 +135,9 @@ class ModuleController extends Controller
             ' запрещено');
         }
         $model = new $this->module->model;
+        $adminModel = new $this->module->adminModel([
+            'model' => $model
+        ]);
         if (Yii::$app->request->isPost) {
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
                 Yii::$app->session->setFlash('alert', [
@@ -161,9 +165,7 @@ class ModuleController extends Controller
         $model->loadDefaultValues();
         return $this->render('create', [
             'model' => $model,
-            'adminModel' => new $this->module->adminModel([
-                'model' => $model
-            ])
+            'adminModel' => $adminModel
         ]);
     }
 
