@@ -39,7 +39,7 @@ $export = \kartik\export\ExportMenu::widget([
 ]) ?>
 <?= \kartik\grid\GridView::widget(\yii\helpers\ArrayHelper::merge([
     'tableOptions' => [
-        'class' => 'table table-bordered',
+        'class' => 'table',
         'style' => 'margin-bottom: 0px'
     ],
     'dataProvider' => $widget->adminModel->getDataProvider(),
@@ -49,6 +49,7 @@ $export = \kartik\export\ExportMenu::widget([
     'responsive' => false,
     'responsiveWrap' => false,
     'persistResize' => true,
+    'striped' => false,
     'pager' => ['options' => ['class' => 'pagination no-margin']],
     'columns' => $widget->adminModel->getGridColumns(),
     'toolbar' => [
