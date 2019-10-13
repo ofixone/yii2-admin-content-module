@@ -47,6 +47,7 @@ $export = \kartik\export\ExportMenu::widget([
     'resizableColumns' => true,
     'hover' => true,
     'responsive' => false,
+    'bordered' => false,
     'responsiveWrap' => false,
     'persistResize' => true,
     'striped' => false,
