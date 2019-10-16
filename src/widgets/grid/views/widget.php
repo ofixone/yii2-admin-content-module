@@ -34,9 +34,6 @@ $export = \kartik\export\ExportMenu::widget([
     'columns' => $widget->adminModel->getGridExportColumns()
 ])
 ?>
-<?php \yii\widgets\Pjax::begin([
-    'id' => $pjaxId
-]) ?>
 <?= \kartik\grid\GridView::widget(\yii\helpers\ArrayHelper::merge([
     'tableOptions' => [
         'class' => 'table',
@@ -51,6 +48,12 @@ $export = \kartik\export\ExportMenu::widget([
     'responsiveWrap' => false,
     'persistResize' => true,
     'striped' => false,
+    'pjax' => true,
+    'pjaxSettings' => [
+        'options' => [
+            'id' => $pjaxId
+        ]
+    ],
     'pager' => ['options' => ['class' => 'pagination no-margin']],
     'columns' => $widget->adminModel->getGridColumns(),
     'toolbar' => [
@@ -75,4 +78,3 @@ $export = \kartik\export\ExportMenu::widget([
             : false
     ],
 ], $widget->options)) ?>
-<?php \yii\widgets\Pjax::end() ?>
