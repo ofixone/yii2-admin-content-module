@@ -21,6 +21,8 @@ $export = \kartik\export\ExportMenu::widget([
     'dataProvider' => $exportDataProvider,
     'showConfirmAlert' => false,
     'clearBuffers' => true,
+    'timeout' => 0,
+    'batchSize' => 100,
     'target' => \kartik\export\ExportMenu::TARGET_BLANK,
     'filename' => $widget->adminModel->getGridExportFilename() . ' (' .
         Yii::$app->formatter->asDatetime(time(),'php:d-m-Y_H-i-s')
@@ -49,8 +51,6 @@ $export = \kartik\export\ExportMenu::widget([
     'persistResize' => true,
     'striped' => false,
     'pjax' => true,
-    'timeout' => 0,
-    'batchSize' => 100,
     'pjaxSettings' => [
         'options' => [
             'id' => $pjaxId
