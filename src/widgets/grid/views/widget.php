@@ -66,7 +66,7 @@ $export = \kartik\export\ExportMenu::widget([
     ],
     'panel' => [
         'heading' => $widget->heading,
-        'before' => !empty($widget->createButton) ? \app\helpers\Html::a(
+        'before' => !empty($widget->createButton) ? \yii\helpers\Html::a(
             \yii\helpers\ArrayHelper::remove($widget->createButton, 'label'),
             \yii\helpers\ArrayHelper::remove($widget->createButton, 'url'),
             $widget->createButton
